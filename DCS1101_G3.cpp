@@ -22,8 +22,6 @@ int main(){
 	while(1){
 		
 		// main menu
-		cout << "1) Enrolment" << endl;
-		cout << "3) Exit" << endl << endl;
 		int option1;
 		int option2;
 		main_menu();   //this function allow user to input option
