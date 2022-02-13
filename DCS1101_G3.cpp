@@ -343,7 +343,11 @@ void summary_option_choice(int option2){			// option selection for summary menu
 			cout << "Case 1" << endl;
 			break;
 		case 2:
-			cout << "Case 2" << endl;
+			cout << "Enrolment Summary" << endl;	//Enrollment Summary
+			for(int i = 0; i <= 20; i++){
+				cout << "-";
+			}
+			cout << "\n";
 			break;
 		}	
 }
