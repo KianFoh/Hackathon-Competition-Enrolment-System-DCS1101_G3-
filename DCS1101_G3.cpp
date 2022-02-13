@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 using namespace std;
 
 // prototype
 int main_menu_option_valid ();
 void option_1 ();
 string option_1_e_num_valid();
-bool option_1_e_num_string_valid(string);
+
 
 int main(){
 	while(1){
@@ -54,49 +53,45 @@ int main_menu_option_valid (){                                // validate user i
 	return option;
 }
 
-void option_1 (){
-	string e_num;
+void option_1 (){                                             // option 1 function 
+	string e_num , e_date;
 	
 	cout << endl << "Enter enrolment number : ";
-    e_num = option_1_e_num_valid();
-    cout << endl << "Enter enrolment date day, month, year : ";
+    e_num = option_1_e_num_valid();                          
+
     
     
 	
 }
 
 string option_1_e_num_valid(){                                // allow user to input enrolment number and validate the data 
-	string e_num_string , e_num;           
-	char e_num_ch;
+	string e_num_string;
+	char e_num_string_digits;
+	bool true_or_false = true , true_or_false_digits = true;
 	
-	while(!(cin >> e_num_ch >> e_num_string) || e_num_ch != 'E' || !option_1_e_num_string_valid(e_num_string)){     // validate first input must be E and no input failure 
-		cout << endl << "\nInvalid enrolment number please reenter again : ";                                                          
-	}
-	e_num = e_num_ch + e_num_string;
-	
-	return e_num;
-}
-
-bool option_1_e_num_string_valid(string e_num_string){         // validate the input following by E
-
-	bool true_or_false = true;
-	char e_num_string_digit;
-	
-	for (int counter = 0; counter < e_num_string.length(); counter++){        //validate all string must be integer
-		e_num_string_digit = e_num_string.at(counter);
-		true_or_false = isdigit(e_num_string_digit);
-		if(true_or_false == false)
+	while(1){
+		cin >> e_num_string;
+		
+		if (e_num_string.length() != 6 || e_num_string.at(0) != 'E' )
+			true_or_false = false;
+		
+		if (true_or_false == true){
+			for (int counter = 1; counter < e_num_string.length(); counter++){
+				e_num_string_digits = e_num_string.at(counter);
+				true_or_false_digits = isdigit(e_num_string_digits);
+				if (true_or_false_digits == false)
+					true_or_false = false;
+			}
+		}
+		if (true_or_false == true)
 			break;
+		cout << "\nInvalid enrolment number please reenter again : ";
 	}
-
-	if (e_num_string.length() != 5)                                          //validate all string must be 5 digits 
-	true_or_false = false;
-
-	return true_or_false;
+	return e_num_string;
 }
-	
-	
-	
+
+
+
 
 
 
