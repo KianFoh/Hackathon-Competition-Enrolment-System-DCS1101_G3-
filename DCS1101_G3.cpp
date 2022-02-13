@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <iomanip>
+#include <fstream>
 using namespace std;
 
 // prototype
@@ -9,10 +11,14 @@ int menu_option_valid ();
 //Main Menu
 void main_menu();
 void option_1 ();
+// Enrolment Option 1 function
 string option_1_e_num_valid();
 string option_1_e_date_valid();
 string option_1_c_n_valid();
 int option_1_age_valid();
+string option_1_category_valid(int);
+string option_1_member_valid ();
+double option_1_ini_price(string);
 //Summary Menu
 void summary_menu();
 void summary_option_choice(int);
@@ -21,7 +27,6 @@ void summary_option_choice(int);
 int main(){
 	while(1){
 		
-		// main menu
 		int option1 = 0;
 		int option2 = 0;
 		main_menu();   
@@ -69,9 +74,11 @@ int menu_option_valid (){                                // validate user input 
 	}	
 	return option;                                               //return valid option
 }
-
+//**************************************************************************************************************
+//Option 1 or enrolment Menu
 void option_1 (){                                             // option 1 function 
-	string e_num , e_date , name , adr ,c_n;
+	string e_num , e_date , name , adr ,c_n , category , member;
+	double ini_price , discount , total_price;
 	int age;
 	
 	cout << endl << "Enter your enrolment number : ";
@@ -95,7 +102,25 @@ void option_1 (){                                             // option 1 functi
 	cout << "Enter your age : ";
 	age = option_1_age_valid();
 	cout << endl;
-    
+	
+	cout << "1 - Primary " << endl                                                 //get category
+		 << "2 - Secondary" << endl
+		 << "3 - Open" << endl
+		 << "Enter your category : ";
+	category = option_1_category_valid(age);
+	
+	cout << endl << "Are you a member of Creative Programming Club member Y or N : ";        //Creative Programming Club member Y or N
+	member = option_1_member_valid();                                                        // return string Yes or No
+	
+	ini_price = option_1_ini_price(category);                                                // initial price
+	
+	if (member == "Yes")                                                                    // get discount for member only
+		discount = ini_price * 10 / 100;
+	
+	total_price = ini_price - discount;                                                     // get total price
+	
+	cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
+	
 }
 
 string option_1_e_num_valid(){                                // allow user to input enrolment number and validate
@@ -115,11 +140,18 @@ string option_1_e_num_valid(){                                // allow user to i
 				e_num_string_digits = e_num_string.at(counter);
 				true_or_false_digits = isdigit(e_num_string_digits);
 				if (true_or_false_digits == false)
-					true_or_false = false;
+					true_or_false = false;	
 			}
 		}
+		fstream myfile;
+		
+		myfile.open(e_num_string + ".txt");                                       //validate if there is a duplicate 
+		if (myfile)
+			true_or_false = false;
+			
 		if (true_or_false == true)
 			break;
+			
 		cout << "\nInvalid enrolment number please reenter again : ";
 	}
 	return e_num_string;                                                           //return the valid enrolment number
@@ -164,7 +196,7 @@ string option_1_e_date_valid(){                              // allow user to in
 				true_or_false = false;
 		}
 		if (true_or_false == false){                                    
-			cout << "invalid enrolment date please reenter again : ";
+			cout << endl << "invalid enrolment date please reenter again : ";
 			continue;		
 		}
 		
@@ -201,7 +233,7 @@ string option_1_c_n_valid(){                                 // allow user to in
 			}
 		}
 		if (true_or_false == false){
-			cout << "Invalid contact number please reenter again : ";
+			cout << endl << "Invalid contact number please reenter again : ";
 			continue;
 		}
 		break;
@@ -220,6 +252,79 @@ int option_1_age_valid(){
 	
 	return age;
 }
+
+string option_1_category_valid(int age){                     // allow user to input category and validate
+	int category_int;
+	string category;
+	bool true_or_false;
+	while(1){
+		true_or_false = false;
+		cin >> category_int;
+		
+		if (cin.fail()){                            // validate input failure
+			cin.clear();
+			cin.ignore(INT_MAX , '\n');
+		}
+		if (category_int == 1)                      // primary
+			if (age <=12){
+				category = "Primary";
+				true_or_false = true;
+			}
+		if (category_int ==2)                  //secondary
+			if (age >= 13 && age <= 17){
+				category = "Secondary";
+				true_or_false = true;
+			}
+
+		if (category_int ==3){                       //open
+			category = "Open";
+			true_or_false = true;
+		}
+		if (true_or_false == false){                     
+			cout << endl << "Invalid category please reenter again : ";
+			continue;
+		}
+		break;
+	}
+	return category;                                 // return string category
+}
+
+string option_1_member_valid (){                             // allow user to input is a member or no
+	string member;
+		while (1){
+			cin >> member;
+			
+			if (member == "Y" || member =="N"){                        
+				if (member == "Y")
+					member = "Yes";
+					
+				else		
+					member = "No";
+			}
+			else{                                                             //validate invalid input
+				cout << endl << "Invalid input please reenter again : ";                
+				continue; 
+			}
+			
+			break;
+		}
+		return member;
+}
+
+double option_1_ini_price(string category){                  // finding initial price with the category
+	double ini_price;
+	
+	if (category == "Primary")
+		ini_price = 20;
+	else if (category == "Secondary")
+		ini_price = 30;
+	else 
+		ini_price = 40;
+	cout << fixed << setprecision(2);
+	return ini_price;
+}
+
+
 //**************************************************************************************************************
 //Summary Menu 
 void summary_menu(){									//display summary menu
