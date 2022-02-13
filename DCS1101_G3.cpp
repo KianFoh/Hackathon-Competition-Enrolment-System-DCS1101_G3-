@@ -4,31 +4,35 @@
 using namespace std;
 
 // prototype
-int main_menu_option_valid ();
+//Global
+int menu_option_valid ();
+//Main Menu
+void main_menu();
 void option_1 ();
 string option_1_e_num_valid();
 string option_1_e_date_valid();
 string option_1_c_n_valid();
 int option_1_age_valid();
+//Summary Menu
+void summary_menu();
+void summary_option_choice(int);
 
 
 int main(){
 	while(1){
 		
 		// main menu
-		int option;
-		cout << "<<Hackathon Competition>>" << endl;
 		cout << "1) Enrolment" << endl;
-		cout << "2) View summary report" << endl;
 		cout << "3) Exit" << endl << endl;
-		cout << "Enter Option: ";
-		option = main_menu_option_valid ();   //this function allow user to input option and validate the data
+		int option1;
+		int option2;
+		main_menu();   //this function allow user to input option
+		option1 = menu_option_valid(); //validate input
 
-
-		if(option == 3)         //option 3 Exit
+		if(option1 == 3)         //option 3 Exit
 			break;	
 			
-		switch(option){
+		switch(option1){
 			
 			case 1:{            // option 1
 				option_1 ();
@@ -36,9 +40,12 @@ int main(){
 				break;
 			}
 			case 2:{           //option 2
-			
-			
-				break;
+				option2 = 0;
+				while(option2 != 3) {
+					summary_menu();
+					option2 = menu_option_valid();
+					summary_option_choice(option2);
+				}
 			}
 		}
 		
@@ -46,8 +53,17 @@ int main(){
 	
   return 0;
 }
+//**************************************************************************************************************
+//Main Menu 
+void main_menu(){ 										//display main_menu
+	cout << "<<Hackathon Competition>>" << endl;
+	cout << "1) Enrolment" << endl;
+	cout << "2) View summary report" << endl;
+	cout << "3) Exit" << endl << endl;
+	cout << "Enter Option: ";
+}
 
-int main_menu_option_valid (){                                // validate user input option 
+int menu_option_valid (){                                // validate user input option 
 	int option;
 	while (!(cin >> option) || option < 1 || option >3 ){        // checking for input failure and make sure option number between 1 to 3
 		cout << endl << "Invalid option please reenter again : ";
@@ -206,6 +222,28 @@ int option_1_age_valid(){
 	}
 	
 	return age;
+}
+//**************************************************************************************************************
+//Summary Menu 
+void summary_menu(){									//display summary menu
+	cout << "<<Hackathon Competition>>" << endl;
+	cout << "1) List all the participant" << endl;
+	cout << "2) Enrollment Summary" << endl;
+	cout << "3) Back to Main Menu" << endl << endl;
+	cout << "Enter Option: ";
+}
+
+void summary_option_choice(int option2){			// option selection for summary menu
+		switch(option2){
+		case 3:
+			break;
+		case 1:
+			cout << "Case 1" << endl;
+			break;
+		case 2:
+			cout << "Case 2" << endl;
+			break;
+		}	
 }
 
 
