@@ -22,9 +22,9 @@ int main(){
 	while(1){
 		
 		// main menu
-		int option1;
-		int option2;
-		main_menu();   //this function allow user to input option
+		int option1 = 0;
+		int option2 = 0;
+		main_menu();   
 		option1 = menu_option_valid(); //validate input
 
 		if(option1 == 3)         //option 3 Exit
@@ -38,7 +38,6 @@ int main(){
 				break;
 			}
 			case 2:{           //option 2
-				option2 = 0;
 				while(option2 != 3) {
 					summary_menu();
 					option2 = menu_option_valid();
