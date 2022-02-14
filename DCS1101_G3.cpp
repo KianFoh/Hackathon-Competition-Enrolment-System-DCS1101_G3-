@@ -19,6 +19,7 @@ int option_1_age_valid();
 string option_1_category_valid(int);
 string option_1_member_valid ();
 double option_1_ini_price(string);
+void option_1_enrolment_slip (string , string , string ,string ,int ,string ,string ,double ,double ,double );
 //Summary Menu
 void summary_menu();
 void summary_option_choice(int);
@@ -95,7 +96,6 @@ void option_1 (){                                             // option 1 functi
 	getline (cin, name);
 	
 	cout << endl << "Enter your Address : ";
-	cin.ignore();
 	getline (cin, adr); 
 	
 	cout << endl << "Enter your Contact Number: ";
@@ -124,8 +124,13 @@ void option_1 (){                                             // option 1 functi
 	
 	cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
 	
+<<<<<<< Updated upstream
 	categoryCounter(category);
 	priceCounter(category, total_price);
+=======
+	option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
+	
+>>>>>>> Stashed changes
 }
 
 string option_1_e_num_valid(){                                // allow user to input enrolment number and validate
@@ -148,11 +153,13 @@ string option_1_e_num_valid(){                                // allow user to i
 					true_or_false = false;	
 			}
 		}
-		fstream myfile;
+		ifstream duplicate;
 		
-		myfile.open(e_num_string + ".txt");                                       //validate if there is a duplicate 
-		if (myfile)
+		duplicate.open(e_num_string + ".txt");                                       //validate if there is a duplicate 
+		if (duplicate.is_open()){
+			duplicate.close();
 			true_or_false = false;
+		}
 			
 		if (true_or_false == true)
 			break;
@@ -210,10 +217,10 @@ string option_1_e_date_valid(){                              // allow user to in
 	
 	if (day <10)                                                         // validate the date in the correct format
 		e_date += "0";
-	e_date = e_date + to_string(day) + "/";
+	e_date = e_date + to_string(day) + "-";
 	if (month <10)
 		e_date += "0";
-	e_date = e_date + to_string (month) + "/" + to_string (year);
+	e_date = e_date + to_string (month) + "-" + to_string (year);
 
 	return e_date;                                                        // return enrolment date
 }
@@ -329,6 +336,28 @@ double option_1_ini_price(string category){                  // finding initial 
 	return ini_price;
 }
 
+void option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age,string member,string category,double ini_price,double discount,double total_price){
+	fstream enrolment;
+	enrolment.open(e_num + ".txt", ios::app);
+	if (enrolment.is_open()){
+		enrolment << "Hackathon Competition Enrolment Slip" << endl;
+		for (int counter = 1; counter <= 42; counter++)
+			enrolment << "*";
+		enrolment << endl << fixed << setprecision(2)
+			      << "Enrolment Number : " << e_num << setw(24) << "Date : " << e_date << endl <<endl
+				  << setw(11) << left << "Name" << setw(4) << left << ":" << name << endl
+				  << setw(11) << left << "Address" << setw(4) << left << ":" << adr <<endl
+				  << setw(11) << left << "Age" << setw(4) << left << ":" << age <<endl
+				  << setw(11) << left << "Member" << setw(4) << left << ":" << member << endl <<endl
+				  << setw(22) << left << "Description" << "Fees " << "(RM)" <<endl
+				  << setw(22) << left << category << right << setw(9) << ini_price << endl
+				  << setw(22) << left << "Discount (10%)" << right << setw(9) << discount << endl
+				  << setw(22) << left << "Total Payment"  << right << setw(9) << total_price <<endl <<endl
+				  << "All the best!";
+		
+	}
+	
+}
 
 //**************************************************************************************************************
 //Summary Menu 
