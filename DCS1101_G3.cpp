@@ -124,13 +124,13 @@ void option_1 (){                                             // option 1 functi
 	
 	cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
 	
-<<<<<<< Updated upstream
+
 	categoryCounter(category);
 	priceCounter(category, total_price);
-=======
+
 	option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
 	
->>>>>>> Stashed changes
+
 }
 
 string option_1_e_num_valid(){                                // allow user to input enrolment number and validate
@@ -336,7 +336,7 @@ double option_1_ini_price(string category){                  // finding initial 
 	return ini_price;
 }
 
-void option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age,string member,string category,double ini_price,double discount,double total_price){
+void option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age,string member,string category,double ini_price,double discount,double total_price){ // function for slip text file
 	fstream enrolment;
 	enrolment.open(e_num + ".txt", ios::app);
 	if (enrolment.is_open()){
