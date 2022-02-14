@@ -22,6 +22,8 @@ double option_1_ini_price(string);
 //Summary Menu
 void summary_menu();
 void summary_option_choice(int);
+void option_2_2();
+int category_to_price(string, int);
 
 
 int main(){
@@ -121,6 +123,7 @@ void option_1 (){                                             // option 1 functi
 	
 	cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
 	
+	category_to_price(category,total_price);
 }
 
 string option_1_e_num_valid(){                                // allow user to input enrolment number and validate
@@ -343,15 +346,56 @@ void summary_option_choice(int option2){			// option selection for summary menu
 			cout << "Case 1" << endl;
 			break;
 		case 2:
-			cout << "Enrolment Summary" << endl;	//Enrollment Summary
-			for(int i = 0; i <= 20; i++){
-				cout << "-";
-			}
-			cout << "\n";
+			option_2_2();
 			break;
 		}	
 }
 
+void option_2_2(){
+	
+	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
+	for(int i = 0; i <= 20; i++){
+		cout << "-";
+	}
+	cout << "\n";
+			
+	cout << "Category"
+		 << setw(20) << right << "Number of People"	
+		 << setw(10) << "Price\n";
+			
+	cout << "Primary\n";
+	
+	cout << "Secondary\n" ;
+	
+	cout << "Open\n" ;
+	
+	cout << "(Each * represents 1 participant)\n\n";
+}
+
+int category_to_price(string category, int total_price){		//takes category and assign total price to that category
+	int primary_count;											//Arrays would be better(for now variables will do)
+	int secondary_count;
+	int open_count;
+	
+	int primary_total;
+	int secondary_total;
+	int open_total;
+	
+	if(category == "Primary"){
+		++primary_count;
+		primary_total += total_price;
+	}
+	else if(category == "Secondary"){
+		++secondary_count;
+		secondary_total += total_price;
+	}
+	else{
+		++open_count;
+		secondary_total += total_price;
+	}
+	
+//	return primary_count,primary_total,secondary_count,secondary_total,open_count,open_total;
+}
 
 
 
