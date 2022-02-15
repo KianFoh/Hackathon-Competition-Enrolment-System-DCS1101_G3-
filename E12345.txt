@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E12345                 Date : 16-02-2020
+
+Name       :   Thien Kian Foh
+Address    :   Taman Merah
+Age        :   6
+Member     :   Yes
+
+Description           Fees (RM)
+Primary                   20.00
+Discount (10%)             2.00
+Total Payment             18.00
+
+All the best!

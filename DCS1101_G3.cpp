@@ -19,7 +19,8 @@ int option_1_age_valid();
 string option_1_category_valid(int);
 string option_1_member_valid ();
 double option_1_ini_price(string);
-void option_1_enrolment_slip (string , string , string ,string ,int ,string ,string ,double ,double ,double );
+bool option_1_enrolment_slip (string , string , string ,string ,int ,string ,string ,double ,double ,double);
+void option_1_enrolment_Text (string ,string ,int ,string ,double ,string);
 //Summary Menu
 void summary_menu();
 void summary_option_choice(int);
@@ -80,54 +81,71 @@ int menu_option_valid (){                                // validate user input 
 //**************************************************************************************************************
 //Option 1 or enrolment Menu
 void option_1 (){                                             // option 1 function 
+	bool Error = false;
 	string e_num , e_date , name , adr ,c_n , category , member;
 	double ini_price , discount , total_price;
 	int age;
+	while (1){
+		cout << endl << "Enter your enrolment number : ";
+	    e_num = option_1_e_num_valid();            
+		              
+		cout << endl << "Enter your enrolment date day,month,year : ";
+		e_date = option_1_e_date_valid();
+		
+		cout << endl << "Enter your Name : ";
+		cin.ignore();
+		getline (cin, name);
+		
+		cout << endl << "Enter your Address : ";
+		getline (cin, adr); 
+		
+		cout << endl << "Enter your Contact Number: ";
+		c_n = option_1_c_n_valid();
+		cout << endl;
+		
+		cout << "Enter your age : ";
+		age = option_1_age_valid();
+		cout << endl;
+		
+		cout << "1 - Primary " << endl                                                 //get category
+			 << "2 - Secondary" << endl
+			 << "3 - Open" << endl
+			 << "Enter your category : ";
+		category = option_1_category_valid(age);
+		
+		cout << endl << "Are you a member of Creative Programming Club member Y or N : ";        //Creative Programming Club member Y or N
+		member = option_1_member_valid();                                                        // return string Yes or No
+		
+		ini_price = option_1_ini_price(category);                                                // initial price
+		
+		if (member == "Yes")                                                                    // get discount for member only
+			discount = ini_price * 10 / 100;
+		
+		total_price = ini_price - discount;                                                     // get total price
+		
+		cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
+		
 	
-	cout << endl << "Enter your enrolment number : ";
-    e_num = option_1_e_num_valid();            
-	              
-	cout << endl << "Enter your enrolment date day,month,year : ";
-	e_date = option_1_e_date_valid();
+		categoryCounter(category);
+		priceCounter(category, total_price);
 	
-	cout << endl << "Enter your Name : ";
-	cin.ignore();
-	getline (cin, name);
-	
-	cout << endl << "Enter your Address : ";
-	getline (cin, adr); 
-	
-	cout << endl << "Enter your Contact Number: ";
-	c_n = option_1_c_n_valid();
-	cout << endl;
-	
-	cout << "Enter your age : ";
-	age = option_1_age_valid();
-	cout << endl;
-	
-	cout << "1 - Primary " << endl                                                 //get category
-		 << "2 - Secondary" << endl
-		 << "3 - Open" << endl
-		 << "Enter your category : ";
-	category = option_1_category_valid(age);
-	
-	cout << endl << "Are you a member of Creative Programming Club member Y or N : ";        //Creative Programming Club member Y or N
-	member = option_1_member_valid();                                                        // return string Yes or No
-	
-	ini_price = option_1_ini_price(category);                                                // initial price
-	
-	if (member == "Yes")                                                                    // get discount for member only
-		discount = ini_price * 10 / 100;
-	
-	total_price = ini_price - discount;                                                     // get total price
-	
-	cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
-	
-	categoryPriceCounter(category, total_price);
 
-	option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
-	
+		categoryPriceCounter(category, total_price);
 
+
+		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);         
+		if (Error == true){
+			cout << endl << "Failed to enrol Please try again" << endl;
+			continue;
+		}
+		
+		option_1_enrolment_Text (e_num, name, age, category, total_price, c_n);
+		
+		cout << "Enrollment done successfully." << endl << endl;
+
+	
+	break;
+	}
 }
 
 string option_1_e_num_valid(){                                // allow user to input enrolment number and validate
@@ -333,14 +351,15 @@ double option_1_ini_price(string category){                  // finding initial 
 	return ini_price;
 }
 
-void option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age,string member,string category,double ini_price,double discount,double total_price){ // function for slip text file
-	fstream enrolment;
-	enrolment.open(e_num + ".txt", ios::app);
-	if (enrolment.is_open()){
-		enrolment << "Hackathon Competition Enrolment Slip" << endl;
+bool option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age,string member,string category,double ini_price,double discount,double total_price){ // function for slip text file
+	bool error = false;
+	fstream enrolment_slip;
+	enrolment_slip.open(e_num + ".txt", ios::app);
+	if (enrolment_slip.is_open()){
+		enrolment_slip << "Hackathon Competition Enrolment Slip" << endl;
 		for (int counter = 1; counter <= 42; counter++)
-			enrolment << "*";
-		enrolment << endl << fixed << setprecision(2)
+			enrolment_slip << "*";
+		enrolment_slip << endl << fixed << setprecision(2)
 			      << "Enrolment Number : " << e_num << setw(24) << "Date : " << e_date << endl <<endl
 				  << setw(11) << left << "Name" << setw(4) << left << ":" << name << endl
 				  << setw(11) << left << "Address" << setw(4) << left << ":" << adr <<endl
@@ -350,12 +369,30 @@ void option_1_enrolment_slip (string e_num, string e_date, string name,string ad
 				  << setw(22) << left << category << right << setw(9) << ini_price << endl
 				  << setw(22) << left << "Discount (10%)" << right << setw(9) << discount << endl
 				  << setw(22) << left << "Total Payment"  << right << setw(9) << total_price <<endl <<endl
-				  << "All the best!";
-		
+				  << "All the best!";	
+				  
+		enrolment_slip.close();
 	}
+	else
+		error = true;
 	
+	return error;
 }
 
+void option_1_enrolment_Text (string e_num, string name, int age, string category, double total_price, string c_n){  //function for add/update enrolment text file
+	fstream enrolment;
+	enrolment.open("enrolment.txt", ios::app);
+		if (enrolment.is_open()){
+			enrolment << "Category : " << category << endl
+					  << "Name : " << name << endl
+					  << "Contact number : " << c_n << endl
+					  << "Age : " << age << endl
+					  << "Enrolment number : " << e_num << endl
+					  << "Payment : RM" << fixed << setprecision(2) << total_price << endl <<endl;
+					  
+			enrolment.close();
+		}
+}
 //**************************************************************************************************************
 //Summary Menu 
 void summary_menu(){									//display summary menu

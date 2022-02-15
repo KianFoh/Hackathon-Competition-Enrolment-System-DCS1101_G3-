@@ -1,0 +1,7 @@
+Category : Primary
+Name : Thien Kian Foh
+Contact number : 0162570760
+Age : 6
+Enrolment number : E12345
+Payment : RM18.00
+
