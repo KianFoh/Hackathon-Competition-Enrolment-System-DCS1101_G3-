@@ -24,8 +24,11 @@ void option_1_enrolment_Text (string ,string ,int ,string ,double ,string);
 //Summary Menu
 void summary_menu();
 void summary_option_choice(int);
+void option_2_1_menu();
+void option_2_1_display(int);
 void option_2_2();
-int categoryPriceCounter(string, int);
+int categoryCounter(string);
+int priceCounter(string, int);
 
 
 int main(){
@@ -129,11 +132,7 @@ void option_1 (){                                             // option 1 functi
 		categoryCounter(category);
 		priceCounter(category, total_price);
 	
-
-		categoryPriceCounter(category, total_price);
-
-
-		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);         
+		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
 		if (Error == true){
 			cout << endl << "Failed to enrol Please try again" << endl;
 			continue;
@@ -142,7 +141,6 @@ void option_1 (){                                             // option 1 functi
 		option_1_enrolment_Text (e_num, name, age, category, total_price, c_n);
 		
 		cout << "Enrollment done successfully." << endl << endl;
-
 	
 	break;
 	}
@@ -351,7 +349,9 @@ double option_1_ini_price(string category){                  // finding initial 
 	return ini_price;
 }
 
-bool option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age,string member,string category,double ini_price,double discount,double total_price){ // function for slip text file
+bool option_1_enrolment_slip (string e_num, string e_date, string name,string adr,int age                             // function for slip text file
+							 ,string member,string category,double ini_price,double discount,double total_price){ 
+
 	bool error = false;
 	fstream enrolment_slip;
 	enrolment_slip.open(e_num + ".txt", ios::app);
@@ -396,7 +396,7 @@ void option_1_enrolment_Text (string e_num, string name, int age, string categor
 //**************************************************************************************************************
 //Summary Menu 
 void summary_menu(){									//display summary menu
-	cout << "<<Hackathon Competition>>" << endl;
+	cout << endl<< "<<Hackathon Competition>>" << endl;
 	cout << "1) List all the participant" << endl;
 	cout << "2) Enrollment Summary" << endl;
 	cout << "3) Back to Main Menu" << endl << endl;
@@ -408,7 +408,8 @@ void summary_option_choice(int option2){			// option selection for summary menu
 		case 3:
 			break;
 		case 1:
-			cout << "Case 1" << endl;
+			option_2_1_menu();
+			option_2_1_display(menu_option_valid ());
 			break;
 		case 2:
 			option_2_2();
@@ -416,49 +417,101 @@ void summary_option_choice(int option2){			// option selection for summary menu
 		}	
 }
 
-int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total; //global variable
+void option_2_1_menu(){                                  //option 2 > option 1 menu
+	cout << endl<< "<<Hackathon Competition>>" << endl;
+	cout << "1) Primary" << endl;
+	cout << "2) Secondary Summary" << endl;
+	cout << "3) Open" << endl << endl;
+	cout << "Which Category participant would you like to list : ";
+}
+
+void option_2_1_display(int option){                                 // display all participant data from enrolment text file for the category user input
+	string line, category;
+	int cout_counter = 0;
+	if (option == 1)                                           
+		category = "Primary";
+	else if (option == 2)
+		category = "Secondary";
+	else
+		category = "Open";
+	
+	cout << endl << "Listing all the participant information in the " << category << " category :" << endl;                 
+	fstream read_enrolment_text;                                      
+	read_enrolment_text.open("enrolment.txt", ios::in);               // open enrolment text file
+		if (read_enrolment_text.is_open()){                           // check if it's open			
+			while(!read_enrolment_text.eof()){                        // keep looping until end of the line
+				getline(read_enrolment_text, line);                  // get everyline store into string line
+				if (cout_counter > 0){                               // counter for print the data 4 line only
+					cout << line << endl;
+					cout_counter--;
+				}
+	
+				if (line.find(category) != string::npos){             // check if the category key word is in the line
+					cout_counter = 4;                                 // if yes cout counter become 4 to print 4 line following by the category
+					cout << endl;
+				}
+			}
+			read_enrolment_text.close();
+		}	
+}
 
 void option_2_2(){
 	
-	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment Summary)
+	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
 	for(int i = 0; i <= 20; i++){
 		cout << "-";
 	}
 	cout << "\n";
 			
-	cout << setw(15) << left << "Category"
+	cout << "Category"
 		 << setw(20) << right << "Number of People"	
 		 << setw(10) << "Price\n";
 			
-	cout << setw(15) << left << "Primary"
-	     << setw(20) << right << primary_count
-	     << setw(10) << primary_total << endl;
+	cout << "Primary\n";
 	
-	cout << setw(15) << left << "Secondary"
-	     << setw(20) << right << secondary_count
-	     << setw(10) << secondary_total << endl;
-	     
-	cout << setw(15) << left << "Open"
-		 << setw(20) << right << open_count
-	     << setw(10) << open_total << endl;
+	cout << "Secondary\n" ;
+	
+	cout << "Open\n" ;
 	
 	cout << "(Each * represents 1 participant)\n\n";
 }
 
-
-int categoryPriceCounter(string category, int total_price){ //calculates the category total and price total
-															//Note to self: Fix as array late to be more efficient
+int categoryCounter(string category){							//total up number of people in certain category
+	int primary_count;											//Arrays would be better(for now variables will do)
+	int secondary_count;
+	int open_count;
+	
 	if(category == "Primary"){
 		++primary_count;
-		primary_total += total_price;
+		return primary_count;
 	}
 	else if(category == "Secondary"){
 		++secondary_count;
-		secondary_total += total_price;
+		return secondary_count;
 	}
 	else{
 		++open_count;
-		open_total += total_price;
+		return open_count;
+	}
+	
+}
+
+int priceCounter(string category, int total_price){				//total up the price for certain category
+	int primary_total;
+	int secondary_total;
+	int open_total;
+	
+	if(category == "Primary"){
+		primary_total += total_price;
+		return primary_total;
+	}
+	else if(category == "Secondary"){
+		secondary_total += total_price;
+		return secondary_total;
+	}
+	else{
+		secondary_total += total_price;
+		return open_total;
 	}
 }
 
