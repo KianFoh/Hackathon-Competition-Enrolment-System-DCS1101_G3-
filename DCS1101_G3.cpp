@@ -379,7 +379,7 @@ void summary_option_choice(int option2){			// option selection for summary menu
 		}	
 }
 
-int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total;
+int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total; //global variable
 
 void option_2_2(){
 	
@@ -409,7 +409,7 @@ void option_2_2(){
 }
 
 
-int categoryPriceCounter(string category, int total_price){
+int categoryPriceCounter(string category, int total_price){ //calculates the category total and price total
 	
 	if(category == "Primary"){
 		++primary_count;
