@@ -125,13 +125,6 @@ void option_1 (){                                             // option 1 functi
 		
 		cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
 		
-	
-		categoryCounter(category);
-		priceCounter(category, total_price);
-	
-
-		categoryPriceCounter(category, total_price);
-
 
 		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);         
 		if (Error == true){
@@ -380,6 +373,7 @@ bool option_1_enrolment_slip (string e_num, string e_date, string name,string ad
 }
 
 void option_1_enrolment_Text (string e_num, string name, int age, string category, double total_price, string c_n){  //function for add/update enrolment text file
+	categoryPriceCounter(category, total_price);
 	fstream enrolment;
 	enrolment.open("enrolment.txt", ios::app);
 		if (enrolment.is_open()){
