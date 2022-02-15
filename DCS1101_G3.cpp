@@ -24,8 +24,7 @@ void option_1_enrolment_slip (string , string , string ,string ,int ,string ,str
 void summary_menu();
 void summary_option_choice(int);
 void option_2_2();
-int categoryCounter(string);
-int priceCounter(string, int);
+int categoryPriceCounter(string, int);
 
 
 int main(){
@@ -124,9 +123,7 @@ void option_1 (){                                             // option 1 functi
 	
 	cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
 	
-
-	categoryCounter(category);
-	priceCounter(category, total_price);
+	categoryPriceCounter(category, total_price);
 
 	option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
 	
@@ -384,61 +381,54 @@ void summary_option_choice(int option2){			// option selection for summary menu
 
 void option_2_2(){
 	
+	int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total;
+	
 	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
 	for(int i = 0; i <= 20; i++){
 		cout << "-";
 	}
 	cout << "\n";
 			
-	cout << "Category"
+	cout << setw(15) << left << "Category"
 		 << setw(20) << right << "Number of People"	
 		 << setw(10) << "Price\n";
 			
-	cout << "Primary\n";
+	cout << setw(15) << left << "Primary"
+	     << setw(20) << right << primary_count
+	     << setw(10) << primary_total << endl;
 	
-	cout << "Secondary\n" ;
-	
-	cout << "Open\n" ;
+	cout << setw(15) << left << "Secondary"
+	     << setw(20) << right << secondary_count
+	     << setw(10) << secondary_total << endl;
+	     
+	cout << setw(15) << left << "Open"
+		 << setw(20) << right << open_count
+	     << setw(10) << open_total << endl;
 	
 	cout << "(Each * represents 1 participant)\n\n";
 }
 
-int categoryCounter(string category){							//total up number of people in certain category
+
+int categoryPriceCounter(string category, int total_price){
 	int primary_count;											//Arrays would be better(for now variables will do)
 	int secondary_count;
 	int open_count;
 	
-	if(category == "Primary"){
-		++primary_count;
-		return primary_count;
-	}
-	else if(category == "Secondary"){
-		++secondary_count;
-		return secondary_count;
-	}
-	else{
-		++open_count;
-		return open_count;
-	}
-	
-}
-
-int priceCounter(string category, int total_price){				//total up the price for certain category
 	int primary_total;
 	int secondary_total;
 	int open_total;
 	
 	if(category == "Primary"){
+		++primary_count;
 		primary_total += total_price;
-		return primary_total;
 	}
 	else if(category == "Secondary"){
+		++secondary_count;
 		secondary_total += total_price;
-		return secondary_total;
 	}
 	else{
-		secondary_total += total_price;
-		return open_total;
+		++open_count;
+		open_total += total_price;
 	}
 }
 
