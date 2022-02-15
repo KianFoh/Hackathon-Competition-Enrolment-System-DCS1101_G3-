@@ -379,9 +379,9 @@ void summary_option_choice(int option2){			// option selection for summary menu
 		}	
 }
 
+int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total;
+
 void option_2_2(){
-	
-	int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total;
 	
 	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
 	for(int i = 0; i <= 20; i++){
@@ -410,13 +410,6 @@ void option_2_2(){
 
 
 int categoryPriceCounter(string category, int total_price){
-	int primary_count;											//Arrays would be better(for now variables will do)
-	int secondary_count;
-	int open_count;
-	
-	int primary_total;
-	int secondary_total;
-	int open_total;
 	
 	if(category == "Primary"){
 		++primary_count;
