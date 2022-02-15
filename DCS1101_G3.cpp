@@ -383,7 +383,7 @@ int primary_count,primary_total,secondary_count,secondary_total,open_count,open_
 
 void option_2_2(){
 	
-	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
+	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment Summary)
 	for(int i = 0; i <= 20; i++){
 		cout << "-";
 	}
@@ -410,7 +410,7 @@ void option_2_2(){
 
 
 int categoryPriceCounter(string category, int total_price){ //calculates the category total and price total
-	
+															//Note to self: Fix as array late to be more efficient
 	if(category == "Primary"){
 		++primary_count;
 		primary_total += total_price;
