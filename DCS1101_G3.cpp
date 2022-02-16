@@ -467,23 +467,41 @@ void option_2_2(){
 	}
 	cout << "\n";
 			
-	cout << setw(15) << left << "Category"
+	cout << setw(15) << left << "Category"				//display first line
 		 << setw(20) << right << "Number of People"	
 		 << setw(11) << "Price\n";
 			
-	cout << setw(15) << left << "Primary"
+	cout << setw(15) << left << "Primary"			//display primary count and total price
 	     << setw(20) << right << primaryCount
-	     << setw(10) << primaryTotal << endl;
-	
-	cout << setw(15) << left << "Secondary"
-	     << setw(20) << right << secondaryCount
-	     << setw(10) << secondaryTotal << endl;
+	     << setw(10) << primaryTotal << "   ";
 	     
-	cout << setw(15) << left << "Open"
-		 << setw(20) << right << openCount
-	     << setw(10) << openTotal << endl;
+	for(int i = 1; i <= primaryCount; i++){
+		cout << "*";
+	}
 	
-	cout << "(Each * represents 1 participant)\n\n";
+	cout << endl;
+	
+	cout << setw(15) << left << "Secondary"		//display secondary count and total price
+	     << setw(20) << right << secondaryCount
+	     << setw(10) << secondaryTotal << "   ";
+	     
+	for(int i = 1; i <= secondaryCount; i++){
+		cout << "*";
+	}
+	
+	cout << endl;
+	     
+	cout << setw(15) << left << "Open"			//display open count and total price
+		 << setw(20) << right << openCount
+	     << setw(10) << openTotal << "   ";
+	     
+	for(int i = 1; i <= openCount; i++){
+		cout << "*";
+	}
+	
+	cout << endl;
+	
+	cout << "(Each * represents 1 participant)\n";
 }
 
 
@@ -515,7 +533,7 @@ void readEnrolment(){
 				openTrue = 1;
 			}	
 					
-			if(input.find("Payment") != string::npos){
+			if(input.find("Payment") != string::npos){		//assign payment to the right category
 				
 				string payment[2];
 				payment[0] = input[12];
