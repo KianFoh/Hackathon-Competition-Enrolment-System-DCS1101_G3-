@@ -1,0 +1,29 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E11234                 Date : 12-11-2009
+
+Name       :   Aol
+Address    :   ap
+Age        :   13
+Member     :   No
+
+Description           Fees (RM)
+Secondary                 30.00
+Discount (10%)             0.00
+Total Payment             30.00
+
+All the best!Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E11234                 Date : 12-11-2009
+
+Name       :   Aol
+Address    :   ap
+Age        :   13
+Member     :   No
+
+Description           Fees (RM)
+Secondary                 30.00
+Discount (10%)             0.00
+Total Payment             30.00
+
+All the best!

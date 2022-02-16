@@ -1,0 +1,29 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E12344                 Date : 12-12-2005
+
+Name       :   Ali
+Address    :   apple
+Age        :   21
+Member     :   Yes
+
+Description           Fees (RM)
+Open                      40.00
+Discount (10%)             4.00
+Total Payment             36.00
+
+All the best!Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E12344                 Date : 12-12-2005
+
+Name       :   Ali
+Address    :   apple
+Age        :   21
+Member     :   Yes
+
+Description           Fees (RM)
+Open                      40.00
+Discount (10%)             4.00
+Total Payment             36.00
+
+All the best!

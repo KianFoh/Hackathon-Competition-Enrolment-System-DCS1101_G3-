@@ -27,7 +27,6 @@ void summary_option_choice(int);
 void option_2_1_menu();
 void option_2_1_display(int);
 void option_2_2();
-int categoryPriceCounter(string, int);
 void readEnrolment();
 
 
@@ -380,7 +379,6 @@ bool option_1_enrolment_slip (string e_num, string e_date, string name,string ad
 }
 
 void option_1_enrolment_Text (string e_num, string name, int age, string category, double total_price, string c_n){  //function for add/update enrolment text file
-	categoryPriceCounter(category, total_price);
 	fstream enrolment;
 	enrolment.open("enrolment.txt", ios::app);
 		if (enrolment.is_open()){
@@ -413,6 +411,7 @@ void summary_option_choice(int option2){			// option selection for summary menu
 			option_2_1_display(menu_option_valid ());
 			break;
 		case 2:
+			readEnrolment();
 			option_2_2();
 			break;
 		}	
@@ -456,11 +455,11 @@ void option_2_1_display(int option){                                 // display 
 		}	
 }
 
-int primary_count,primary_total,secondary_count,secondary_total,open_count,open_total; //global variable
+//global variable
+int primaryCount = 0,secondaryCount = 0,openCount = 0;
+int primaryTotal = 0,secondaryTotal = 0,openTotal = 0;
 
 void option_2_2(){
-	
-	void readEnrolment();
 	
 	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
 	for(int i = 0; i <= 20; i++){
@@ -470,37 +469,82 @@ void option_2_2(){
 			
 	cout << setw(15) << left << "Category"
 		 << setw(20) << right << "Number of People"	
-		 << setw(10) << "Price\n";
+		 << setw(11) << "Price\n";
 			
 	cout << setw(15) << left << "Primary"
-	     << setw(20) << right << primary_count
-	     << setw(10) << primary_total << endl;
+	     << setw(20) << right << primaryCount
+	     << setw(10) << primaryTotal << endl;
 	
 	cout << setw(15) << left << "Secondary"
-	     << setw(20) << right << secondary_count
-	     << setw(10) << secondary_total << endl;
+	     << setw(20) << right << secondaryCount
+	     << setw(10) << secondaryTotal << endl;
 	     
 	cout << setw(15) << left << "Open"
-		 << setw(20) << right << open_count
-	     << setw(10) << open_total << endl;
+		 << setw(20) << right << openCount
+	     << setw(10) << openTotal << endl;
 	
 	cout << "(Each * represents 1 participant)\n\n";
 }
 
-int categoryPriceCounter(string category, int total_price){ //calculates the category total and price total
-															//Note to self: Fix as array late to be more efficient
-	if(category == "Primary"){
-		++primary_count;
-		primary_total += total_price;
-	}
-	else if(category == "Secondary"){
-		++secondary_count;
-		secondary_total += total_price;
+
+void readEnrolment(){
+	
+	int primaryTrue = 0,secondaryTrue = 0,openTrue = 0; 
+	string input; 
+	fstream nameFile; 
+	
+	nameFile.open("enrolment.txt", ios::in); 			//open file
+	
+	if (nameFile){
+		getline(nameFile, input);
+		
+		while (nameFile){
+			
+			//cout << input << endl;							//just some test
+			
+			if (input.find("Primary") != string::npos){      //Primary Count     
+				primaryCount++;
+				primaryTrue = 1;
+			}
+			else if (input.find("Secondary") != string::npos){      //Secondory Count     
+				secondaryCount++;
+				secondaryTrue = 1;
+			}
+			else if (input.find("Open") != string::npos){            //Open Count
+				openCount++;
+				openTrue = 1;
+			}	
+					
+			if(input.find("Payment") != string::npos){
+				
+				string payment[2];
+				payment[0] = input[12];
+				payment[1] = input[13]; 
+				string paymentCombo = payment[0] + payment[1];
+				int paymentFull = stoi(paymentCombo);
+				
+				
+				if(primaryTrue == 1){
+					primaryTotal += paymentFull;
+					primaryTrue = 0;
+				}
+				else if(secondaryTrue == 1){
+					secondaryTotal += paymentFull;
+					secondaryTrue = 0;
+				}
+				else if(openTrue == 1){
+					openTotal += paymentFull;
+					openTrue = 0;
+				}
+			}
+					
+			getline(nameFile, input);
+		}
+		//cout << "Primary " << primaryTotal << " Secondary " << secondaryTotal << " Open " << openTotal;		//just some test
+		
+		nameFile.close();			//close file
 	}
 	else{
-		++open_count;
-		open_total += total_price;
+		nameFile.close();
 	}
 }
-
-
