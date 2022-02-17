@@ -19,3 +19,10 @@ Age : 13
 Enrolment number : E11234
 Payment : RM30.00
 
+Category : Secondary
+Name : John
+Contact number : 0123456789
+Age : 15
+Enrolment number : E66123
+Payment : RM30.00
+

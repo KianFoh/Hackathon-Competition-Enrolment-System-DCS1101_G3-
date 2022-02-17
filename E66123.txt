@@ -1,0 +1,29 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E66123                 Date : 11-11-2009
+
+Name       :   John
+Address    :   apple
+Age        :   15
+Member     :   No
+
+Description           Fees (RM)
+Secondary                 30.00
+Discount (10%)             0.00
+Total Payment             30.00
+
+All the best!Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E66123                 Date : 11-11-2009
+
+Name       :   John
+Address    :   apple
+Age        :   15
+Member     :   No
+
+Description           Fees (RM)
+Secondary                 30.00
+Discount (10%)             0.00
+Total Payment             30.00
+
+All the best!

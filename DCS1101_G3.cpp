@@ -28,6 +28,7 @@ void option_2_1_menu();
 void option_2_1_display(int);
 void option_2_2();
 void readEnrolment();
+int categoryPriceCounter(string, int);
 
 
 int main(){
@@ -140,6 +141,8 @@ void option_1 (){                                             // option 1 functi
 		option_1_enrolment_Text (e_num, name, age, category, total_price, c_n);
 		
 		cout << "Enrollment done successfully." << endl << endl;
+		
+		categoryPriceCounter(category,total_price);			//this is used to update the summary after system has runned
 	
 	break;
 	}
@@ -411,7 +414,6 @@ void summary_option_choice(int option2){			// option selection for summary menu
 			option_2_1_display(menu_option_valid ());
 			break;
 		case 2:
-			readEnrolment();
 			option_2_2();
 			break;
 		}	
@@ -461,6 +463,15 @@ int primaryTotal = 0,secondaryTotal = 0,openTotal = 0;
 
 void option_2_2(){
 	
+	bool hasRunned;
+	
+	if(hasRunned == false){				//if the program has read the enrolment.txt. do not make it run again but instead use categoryPriceCounter. saves memory
+		primaryCount = 0,secondaryCount = 0,openCount = 0;
+		primaryTotal = 0,secondaryTotal = 0,openTotal = 0;
+		readEnrolment();
+		hasRunned = true;	
+	}
+	
 	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
 	for(int i = 0; i <= 20; i++){
 		cout << "-";
@@ -507,7 +518,7 @@ void option_2_2(){
 
 void readEnrolment(){
 	
-	int primaryTrue = 0,secondaryTrue = 0,openTrue = 0; 
+	bool primaryTrue = false,secondaryTrue = false,openTrue = false; 
 	string input; 
 	fstream nameFile; 
 	
@@ -522,15 +533,15 @@ void readEnrolment(){
 			
 			if (input.find("Primary") != string::npos){      //Primary Count     
 				primaryCount++;
-				primaryTrue = 1;
+				primaryTrue = true;
 			}
 			else if (input.find("Secondary") != string::npos){      //Secondory Count     
 				secondaryCount++;
-				secondaryTrue = 1;
+				secondaryTrue = true;
 			}
 			else if (input.find("Open") != string::npos){            //Open Count
 				openCount++;
-				openTrue = 1;
+				openTrue = true;
 			}	
 					
 			if(input.find("Payment") != string::npos){		//assign payment to the right category
@@ -542,15 +553,15 @@ void readEnrolment(){
 				int paymentFull = stoi(paymentCombo);
 				
 				
-				if(primaryTrue == 1){
+				if(primaryTrue == true){
 					primaryTotal += paymentFull;
 					primaryTrue = 0;
 				}
-				else if(secondaryTrue == 1){
+				else if(secondaryTrue == true){
 					secondaryTotal += paymentFull;
 					secondaryTrue = 0;
 				}
-				else if(openTrue == 1){
+				else if(openTrue == true){
 					openTotal += paymentFull;
 					openTrue = 0;
 				}
@@ -564,5 +575,21 @@ void readEnrolment(){
 	}
 	else{
 		nameFile.close();
+	}
+}
+
+int categoryPriceCounter(string category, int total_price){ //calculates the category total and price total
+															
+	if(category == "Primary"){
+		++primaryCount;
+		primaryTotal += total_price;
+	}
+	else if(category == "Secondary"){
+		++secondaryCount;
+		secondaryTotal += total_price;
+	}
+	else{
+		++openCount;
+		openTotal += total_price;
 	}
 }
