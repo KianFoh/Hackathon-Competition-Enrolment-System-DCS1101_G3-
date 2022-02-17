@@ -1,3 +1,9 @@
+/*********************
+Project Contributions
+1. Thien Kian Foh
+2. Aiman Hakimin
+*********************/
+
 #include <iostream>
 #include <string>
 #include <cmath>
