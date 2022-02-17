@@ -459,7 +459,7 @@ void option_2_1_display(int option){                                 // display 
 
 //global variable
 int primaryCount = 0,secondaryCount = 0,openCount = 0;
-int primaryTotal = 0,secondaryTotal = 0,openTotal = 0;
+float primaryTotal = 0,secondaryTotal = 0,openTotal = 0;
 
 void option_2_2(){
 	
@@ -480,11 +480,13 @@ void option_2_2(){
 			
 	cout << setw(15) << left << "Category"				//display first line
 		 << setw(20) << right << "Number of People"	
-		 << setw(11) << "Price\n";
-			
+		 << setw(14) << "Price(RM)\n";
+	
+	cout << fixed << setprecision(2);	
+
 	cout << setw(15) << left << "Primary"			//display primary count and total price
 	     << setw(20) << right << primaryCount
-	     << setw(10) << primaryTotal << "   ";
+	     << setw(12) << primaryTotal << "   ";
 	     
 	for(int i = 1; i <= primaryCount; i++){
 		cout << "*";
@@ -494,7 +496,7 @@ void option_2_2(){
 	
 	cout << setw(15) << left << "Secondary"		//display secondary count and total price
 	     << setw(20) << right << secondaryCount
-	     << setw(10) << secondaryTotal << "   ";
+	     << setw(12) << secondaryTotal << "   ";
 	     
 	for(int i = 1; i <= secondaryCount; i++){
 		cout << "*";
@@ -504,7 +506,7 @@ void option_2_2(){
 	     
 	cout << setw(15) << left << "Open"			//display open count and total price
 		 << setw(20) << right << openCount
-	     << setw(10) << openTotal << "   ";
+	     << setw(12) << openTotal << "   ";
 	     
 	for(int i = 1; i <= openCount; i++){
 		cout << "*";
