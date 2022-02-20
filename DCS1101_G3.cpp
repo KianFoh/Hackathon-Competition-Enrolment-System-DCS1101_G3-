@@ -45,9 +45,10 @@ int main(){
 		main_menu();   
 		option1 = menu_option_valid(); //validate input
 
-		if(option1 == 3)         //option 3 Exit
+		if(option1 == 3){         //option 3 Exit
+			cout << endl << "Program successfully closed" << endl;
 			break;	
-			
+		}
 		switch(option1){
 			
 			case 1:{            // option 1
@@ -95,6 +96,8 @@ void option_1 (){                                             // option 1 functi
 	double ini_price , discount , total_price;
 	int age;
 	while (1){
+		discount = 0;
+		
 		cout << endl << "Enter your enrolment number : ";
 	    e_num = option_1_e_num_valid();            
 		              
@@ -108,7 +111,7 @@ void option_1 (){                                             // option 1 functi
 		cout << endl << "Enter your Address : ";
 		getline (cin, adr); 
 		
-		cout << endl << "Enter your Contact Number: ";
+		cout << endl << "Enter your Contact Number : ";
 		c_n = option_1_c_n_valid();
 		cout << endl;
 		
@@ -135,10 +138,7 @@ void option_1 (){                                             // option 1 functi
 		cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
 		
 		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
-
-
-		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);         
-
+    
 		if (Error == true){
 			cout << endl << "Failed to enrol Please try again" << endl;
 			continue;
@@ -406,7 +406,7 @@ void option_1_enrolment_Text (string e_num, string name, int age, string categor
 void summary_menu(){									//display summary menu
 	cout << endl<< "<<Hackathon Competition>>" << endl;
 	cout << "1) List all the participant" << endl;
-	cout << "2) Enrollment Summary" << endl;
+	cout << "2) Enrolment Summary" << endl;
 	cout << "3) Back to Main Menu" << endl << endl;
 	cout << "Enter Option: ";
 }
