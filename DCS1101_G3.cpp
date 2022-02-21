@@ -9,11 +9,13 @@ Project Contributions
 #include <cmath>
 #include <iomanip>
 #include <fstream>
+#include <windows.h>
 using namespace std;
 
 // prototype
 //Global
 int menu_option_valid ();
+void colourMaker(int);
 //Main Menu
 void main_menu();
 void option_1 ();
@@ -493,34 +495,44 @@ void option_2_2(){
 	cout << setw(15) << left << "Primary"			//display primary count and total price
 	     << setw(20) << right << primaryCount
 	     << setw(12) << primaryTotal << "   ";
-	     
+		 
+	colourMaker(14); 
 	for(int i = 1; i <= primaryCount; i++){
 		cout << "*";
 	}
 	
 	cout << endl;
 	
+	colourMaker(7); 
 	cout << setw(15) << left << "Secondary"		//display secondary count and total price
 	     << setw(20) << right << secondaryCount
 	     << setw(12) << secondaryTotal << "   ";
 	     
+	colourMaker(14); 
 	for(int i = 1; i <= secondaryCount; i++){
 		cout << "*";
 	}
 	
 	cout << endl;
-	     
+	
+	colourMaker(7); 
 	cout << setw(15) << left << "Open"			//display open count and total price
 		 << setw(20) << right << openCount
 	     << setw(12) << openTotal << "   ";
 	     
+	colourMaker(14); 
 	for(int i = 1; i <= openCount; i++){
 		cout << "*";
 	}
 	
 	cout << endl;
 	
-	cout << "(Each * represents 1 participant)\n";
+	colourMaker(7); 
+	cout << "(Each "; 
+	colourMaker(14);
+	cout << "*";
+	colourMaker(7);
+	cout << " represents 1 participant)\n";
 }
 
 
@@ -600,4 +612,12 @@ int categoryPriceCounter(string category, int total_price){ //calculates the cat
 		++openCount;
 		openTotal += total_price;
 	}
+}
+
+void colourMaker(int colour){		//adds some colour to text
+	HANDLE hConsole;
+	
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	
+	SetConsoleTextAttribute(hConsole, colour);
 }
