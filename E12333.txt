@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E12333                 Date : 12-12-2005
+
+Name       :   Ali
+Address    :   apple
+Age        :   15
+Member     :   No
+
+Description           Fees (RM)
+Secondary                 30.00
+Discount (10%)             0.00
+Total Payment             30.00
+
+All the best!

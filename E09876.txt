@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E09876                 Date : 12-01-2009
+
+Name       :   Apple
+Address    :   woop
+Age        :   21
+Member     :   Yes
+
+Description           Fees (RM)
+Open                      40.00
+Discount (10%)             4.00
+Total Payment             36.00
+
+All the best!

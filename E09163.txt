@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E09163                 Date : 12-03-2019
+
+Name       :   Aim man
+Address    :   apple
+Age        :   19
+Member     :   No
+
+Description           Fees (RM)
+Open                      40.00
+Discount (10%)             0.00
+Total Payment             40.00
+
+All the best!

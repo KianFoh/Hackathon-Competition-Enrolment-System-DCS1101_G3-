@@ -48,7 +48,9 @@ int main(){
 		option1 = menu_option_valid(); //validate input
 
 		if(option1 == 3){         //option 3 Exit
+			colourMaker(6);
 			cout << endl << "Program successfully closed" << endl;
+			colourMaker(15);
 			break;	
 		}
 		switch(option1){
@@ -74,10 +76,15 @@ int main(){
 //**************************************************************************************************************
 //Main Menu 
 void main_menu(){ 										//display main_menu
+	colourMaker(79);
 	cout << "<<Hackathon Competition>>" << endl;
+	colourMaker(9);
 	cout << "1) Enrolment" << endl;
+	colourMaker(14);
 	cout << "2) View summary report" << endl;
+	colourMaker(10);
 	cout << "3) Exit" << endl << endl;
+	colourMaker(15);
 	cout << "Enter Option: ";
 }
 
@@ -100,34 +107,53 @@ void option_1 (){                                             // option 1 functi
 	while (1){
 		discount = 0;
 		
+		colourMaker(11);
 		cout << endl << "Enter your enrolment number : ";
+		colourMaker(15);
 	    e_num = option_1_e_num_valid();            
-		              
+		
+		colourMaker(3);              
 		cout << endl << "Enter your enrolment date day,month,year : ";
+		colourMaker(15);
 		e_date = option_1_e_date_valid();
 		
+		colourMaker(11);
 		cout << endl << "Enter your Name : ";
 		cin.ignore();
+		colourMaker(15);
 		getline (cin, name);
 		
+		colourMaker(3);
 		cout << endl << "Enter your Address : ";
+		colourMaker(15);
 		getline (cin, adr); 
 		
+		colourMaker(11);
 		cout << endl << "Enter your Contact Number : ";
+		colourMaker(15);
 		c_n = option_1_c_n_valid();
 		cout << endl;
 		
+		colourMaker(3);
 		cout << "Enter your age : ";
+		colourMaker(15);
 		age = option_1_age_valid();
 		cout << endl;
 		
-		cout << "1 - Primary " << endl                                                 //get category
-			 << "2 - Secondary" << endl
-			 << "3 - Open" << endl
-			 << "Enter your category : ";
+		colourMaker(12);
+		cout << "1 - Primary " << endl;                                                 //get category
+		colourMaker(6);
+		cout << "2 - Secondary" << endl;
+		colourMaker(9);
+		cout << "3 - Open" << endl;
+		colourMaker(11);
+		cout << "Enter your category : ";
+		colourMaker(15);
 		category = option_1_category_valid(age);
 		
+		colourMaker(3);
 		cout << endl << "Are you a member of Creative Programming Club member Y or N : ";        //Creative Programming Club member Y or N
+		colourMaker(15);
 		member = option_1_member_valid();                                                        // return string Yes or No
 		
 		ini_price = option_1_ini_price(category);                                                // initial price
@@ -137,18 +163,24 @@ void option_1 (){                                             // option 1 functi
 		
 		total_price = ini_price - discount;                                                     // get total price
 		
+		colourMaker(14);
 		cout << endl << "Amount of payment is RM" << total_price << "." << endl << endl;
+		colourMaker(15);
 		
 		Error = option_1_enrolment_slip (e_num,  e_date,  name, adr, age, member, category, ini_price, discount, total_price);
     
 		if (Error == true){
+			colourMaker(12);
 			cout << endl << "Failed to enrol Please try again" << endl;
+			colourMaker(15);
 			continue;
 		}
 		
 		option_1_enrolment_Text (e_num, name, age, category, total_price, c_n);
 		
+		colourMaker(6);
 		cout << "Enrollment done successfully." << endl << endl;
+		colourMaker(15);
 		
 		categoryPriceCounter(category,total_price);			//this is used to update the summary after system has runned
 	
@@ -186,8 +218,10 @@ string option_1_e_num_valid(){                                // allow user to i
 			
 		if (true_or_false == true)
 			break;
-			
+		
+		colourMaker(12);	
 		cout << "\nInvalid enrolment number please reenter again : ";
+		colourMaker(15);
 	}
 	return e_num_string;                                                           //return the valid enrolment number
 }
@@ -230,8 +264,10 @@ string option_1_e_date_valid(){                              // allow user to in
 			else if (day <= 0 || day > max_valid_day )                 //validate day
 				true_or_false = false;
 		}
-		if (true_or_false == false){                                    
+		if (true_or_false == false){     
+			colourMaker(12);                               
 			cout << endl << "invalid enrolment date please reenter again : ";
+			colourMaker(15);
 			continue;		
 		}
 		
@@ -268,7 +304,9 @@ string option_1_c_n_valid(){                                 // allow user to in
 			}
 		}
 		if (true_or_false == false){
+			colourMaker(12);
 			cout << endl << "Invalid contact number please reenter again : ";
+			colourMaker(15);
 			continue;
 		}
 		break;
@@ -280,7 +318,9 @@ string option_1_c_n_valid(){                                 // allow user to in
 int option_1_age_valid(){
 	int age;
 	while (!(cin >> age) || age < 6 || age > 130){
+		colourMaker(12);
 		cout << endl << "Invalid age please reenter again : ";
+		colourMaker(15);
 		cin.clear();
 		cin.ignore(INT_MAX , '\n');
 	}
@@ -315,8 +355,10 @@ string option_1_category_valid(int age){                     // allow user to in
 			category = "Open";
 			true_or_false = true;
 		}
-		if (true_or_false == false){                     
+		if (true_or_false == false){    
+			colourMaker(12);                 
 			cout << endl << "Invalid category please reenter again : ";
+			colourMaker(15);
 			continue;
 		}
 		break;
@@ -337,7 +379,9 @@ string option_1_member_valid (){                             // allow user to in
 					member = "No";
 			}
 			else{                                                             //validate invalid input
-				cout << endl << "Invalid input please reenter again : ";                
+				colourMaker(12);
+				cout << endl << "Invalid input please reenter again : "; 
+				colourMaker(15);               
 				continue; 
 			}
 			
@@ -406,10 +450,15 @@ void option_1_enrolment_Text (string e_num, string name, int age, string categor
 //**************************************************************************************************************
 //Summary Menu 
 void summary_menu(){									//display summary menu
+	colourMaker(79);
 	cout << endl<< "<<Hackathon Competition>>" << endl;
+	colourMaker(13);
 	cout << "1) List all the participant" << endl;
+	colourMaker(11);
 	cout << "2) Enrolment Summary" << endl;
+	colourMaker(10);
 	cout << "3) Back to Main Menu" << endl << endl;
+	colourMaker(15);
 	cout << "Enter Option: ";
 }
 
@@ -428,24 +477,36 @@ void summary_option_choice(int option2){			// option selection for summary menu
 }
 
 void option_2_1_menu(){                                  //option 2 > option 1 menu
+	colourMaker(79);
 	cout << endl<< "<<Hackathon Competition>>" << endl;
+	colourMaker(12);
 	cout << "1) Primary" << endl;
-	cout << "2) Secondary Summary" << endl;
+	colourMaker(6);
+	cout << "2) Secondary" << endl;
+	colourMaker(9);
 	cout << "3) Open" << endl << endl;
+	colourMaker(15);
 	cout << "Which Category participant would you like to list : ";
 }
 
 void option_2_1_display(int option){                                 // display all participant data from enrolment text file for the category user input
 	string line, category;
 	int cout_counter = 0;
-	if (option == 1)                                           
+	if (option == 1){
 		category = "Primary";
-	else if (option == 2)
+		colourMaker(12);
+	}                                           
+	else if (option == 2){
 		category = "Secondary";
-	else
+		colourMaker(6);
+	}
+	else{
 		category = "Open";
+		colourMaker(9);
+	}
 	
-	cout << endl << "Listing all the participant information in the " << category << " category :" << endl;                 
+	cout << endl << "Listing all the participant information in the " << category << " category :" << endl;  
+	colourMaker(15);               
 	fstream read_enrolment_text;                                      
 	read_enrolment_text.open("enrolment.txt", ios::in);               // open enrolment text file
 		if (read_enrolment_text.is_open()){                           // check if it's open			
@@ -480,7 +541,9 @@ void option_2_2(){
 		hasRunned = true;	
 	}
 	
+	colourMaker(176);
 	cout << "Enrolment Summary" << endl;	//Option 2 of main menu and option 2(Enrollment SUmmary)
+	colourMaker(15);
 	for(int i = 0; i <= 20; i++){
 		cout << "-";
 	}
@@ -492,6 +555,7 @@ void option_2_2(){
 	
 	cout << fixed << setprecision(2);	
 
+	colourMaker(12);
 	cout << setw(15) << left << "Primary"			//display primary count and total price
 	     << setw(20) << right << primaryCount
 	     << setw(12) << primaryTotal << "   ";
@@ -503,7 +567,7 @@ void option_2_2(){
 	
 	cout << endl;
 	
-	colourMaker(7); 
+	colourMaker(6); 
 	cout << setw(15) << left << "Secondary"		//display secondary count and total price
 	     << setw(20) << right << secondaryCount
 	     << setw(12) << secondaryTotal << "   ";
@@ -515,7 +579,7 @@ void option_2_2(){
 	
 	cout << endl;
 	
-	colourMaker(7); 
+	colourMaker(9); 
 	cout << setw(15) << left << "Open"			//display open count and total price
 		 << setw(20) << right << openCount
 	     << setw(12) << openTotal << "   ";

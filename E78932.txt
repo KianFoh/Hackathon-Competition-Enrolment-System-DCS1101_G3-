@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E78932                 Date : 12-05-2900
+
+Name       :   Apple 
+Address    :   Wahoo
+Age        :   17
+Member     :   Yes
+
+Description           Fees (RM)
+Secondary                 30.00
+Discount (10%)             3.00
+Total Payment             27.00
+
+All the best!
