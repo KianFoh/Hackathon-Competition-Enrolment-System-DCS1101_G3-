@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E90261                 Date : 12-03-2009
+
+Name       :   Ali
+Address    :   Waterfront housing
+Age        :   6
+Member     :   No
+
+Description           Fees (RM)
+Primary                   20.00
+Discount (10%)             0.00
+Total Payment             20.00
+
+All the best!

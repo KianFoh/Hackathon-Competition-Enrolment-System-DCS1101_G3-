@@ -91,7 +91,9 @@ void main_menu(){ 										//display main_menu
 int menu_option_valid (){                                // validate user input option 
 	int option;
 	while (!(cin >> option) || option < 1 || option >3 ){        // checking for input failure and make sure option number between 1 to 3
+		colourMaker(12);
 		cout << endl << "Invalid option please reenter again : ";
+		colourMaker(15);
 		cin.clear();
 		cin.ignore(INT_MAX , '\n');
 	}	

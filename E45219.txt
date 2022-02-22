@@ -1,0 +1,15 @@
+Hackathon Competition Enrolment Slip
+******************************************
+Enrolment Number : E45219                 Date : 10-05-2021
+
+Name       :   Aiman Hakimin
+Address    :   2b,Bayswater Resort Condo,Lebuh Tunku Kudin 2,11700 Gelugor,Pulau Pinang.
+Age        :   21
+Member     :   Yes
+
+Description           Fees (RM)
+Open                      40.00
+Discount (10%)             4.00
+Total Payment             36.00
+
+All the best!

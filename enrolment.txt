@@ -54,3 +54,17 @@ Age : 17
 Enrolment number : E78932
 Payment : RM27.00
 
+Category : Open
+Name : Aiman Hakimin
+Contact number : 0164640748
+Age : 21
+Enrolment number : E45219
+Payment : RM36.00
+
+Category : Primary
+Name : Ali
+Contact number : 0475926594
+Age : 6
+Enrolment number : E90261
+Payment : RM20.00
+
