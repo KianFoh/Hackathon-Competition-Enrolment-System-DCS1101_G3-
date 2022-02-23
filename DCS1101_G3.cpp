@@ -37,6 +37,7 @@ void option_2_1_display(int);
 void option_2_2();
 void readEnrolment();
 int categoryPriceCounter(string, int);
+void starMaker(int);
 
 
 int main(){
@@ -562,10 +563,7 @@ void option_2_2(){
 	     << setw(20) << right << primaryCount
 	     << setw(12) << primaryTotal << "   ";
 		 
-	colourMaker(14); 
-	for(int i = 1; i <= primaryCount; i++){
-		cout << "*";
-	}
+	starMaker(primaryCount);
 	
 	cout << endl;
 	
@@ -573,11 +571,8 @@ void option_2_2(){
 	cout << setw(15) << left << "Secondary"		//display secondary count and total price
 	     << setw(20) << right << secondaryCount
 	     << setw(12) << secondaryTotal << "   ";
-	     
-	colourMaker(14); 
-	for(int i = 1; i <= secondaryCount; i++){
-		cout << "*";
-	}
+	      
+	starMaker(secondaryCount);
 	
 	cout << endl;
 	
@@ -586,19 +581,32 @@ void option_2_2(){
 		 << setw(20) << right << openCount
 	     << setw(12) << openTotal << "   ";
 	     
-	colourMaker(14); 
-	for(int i = 1; i <= openCount; i++){
-		cout << "*";
-	}
+	starMaker(openCount);
 	
 	cout << endl;
 	
-	colourMaker(7); 
+	colourMaker(15); 
 	cout << "(Each "; 
 	colourMaker(14);
 	cout << "*";
-	colourMaker(7);
-	cout << " represents 1 participant)\n";
+	colourMaker(15);
+	cout << " represents 1 participant)" << endl;
+	cout << "(Each ";
+	colourMaker(11);
+	cout << "%";
+	colourMaker(15);
+	cout << " represents 10 participant)" << endl;
+	cout << "(Each ";
+	colourMaker(13);
+	cout << "#";
+	colourMaker(15);
+	cout << " represents 50 participant)" << endl;
+	cout << "(Each ";
+	colourMaker(10);
+	cout << "@";
+	colourMaker(15);
+	cout << " represents 100 participant)" << endl;
+	
 }
 
 
@@ -686,4 +694,55 @@ void colourMaker(int colour){		//adds some colour to text
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	
 	SetConsoleTextAttribute(hConsole, colour);
+}
+
+void starMaker(int counter){					//properly show data on summary 
+	if(counter >= 100){
+		colourMaker(10);
+		for(int i = 1;i <= counter/100;i++){
+			cout << "@";
+		}
+		colourMaker(13);
+		for(int i = 1;i <= (counter-100 * (counter/100))/50;i++){
+			cout << "#";
+		}
+		colourMaker(11);
+		for(int i = 1; i <= (counter - 50 * (counter/50))/10;i++){
+			cout << "%";
+		}
+		colourMaker(14);
+		for(int i = 1; i <= (counter - 10*(counter/10)); i++){
+			cout << "*";
+		}
+	}
+	else if(counter >= 50){
+		colourMaker(13);
+		for(int i = 1; i <= counter/ 50; i++){
+			cout << "#";
+		}
+		colourMaker(11);
+		for(int i = 1; i <= (counter - 50*(counter/50))/10;i++){
+			cout << "%";
+		}
+		colourMaker(14);
+		for(int i = 1; i <= counter % 10; i++){
+			cout << "*";
+		}
+	}
+	else if(counter >= 10){
+		colourMaker(11);
+		for(int i = 1; i <= counter/10;i++){
+			cout << "%";
+		}
+		colourMaker(14);
+		for(int i = 1; i <= counter % 10; i++){
+			cout << "*";
+		}
+	}
+	else{
+		colourMaker(14);
+		for(int i = 1; i <= counter; i++){
+			cout << "*";
+		}
+	}
 }
